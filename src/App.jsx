@@ -1,10 +1,11 @@
 import GlobalStyle from "./GlobalStyles";
+import AppLayout from "./ui/AppLayout";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div>Hello World</div>
+      <AppLayout />
     </>
   );
 }

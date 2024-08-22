@@ -1,13 +1,25 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+ @font-face {
+    font-family: 'Le Murmure';
+    src: url('./fonts/LeMurmure-Regular.woff2') format('woff2'),
+         url('./fonts/LeMurmure-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
   :root {
     --color-primary-bg: #AE97E8;
     --color-secondary-bg: #a96dff;
-    --color-accent-bg: #ff69b4;
+    --color-slider-pink-bg: #FA8FEF;
+    --color-slider-blue-bg: #AECFFF;
     --color-text-primary: #ffffff;
     --color-text-secondary: #c4c4ff;
     --color-button-bg: yellow;
+
+    --border-radius-lg: 50px;
 
     --font-large: 36px;
     --font-medium: 24px;
@@ -25,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Euclid Circular A', sans-serif;
     background-color: var(--color-primary-bg);
     color: var(--color-text-primary);
   }
