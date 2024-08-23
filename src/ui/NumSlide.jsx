@@ -16,7 +16,7 @@ const StyledTitle = styled.span`
 `;
 
 const StyledNumber = styled.span`
-  font-family: "Le Murmure", sans-serif;
+  font-family: "Floreste", sans-serif;
   font-size: 40px;
 `;
 

@@ -6,6 +6,8 @@ const StyledAppLayout = styled.div`
   display: flex;
   width: 100%;
 
+  align-items: start;
+
   /* height: 100vh; */
 `;
 

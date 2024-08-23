@@ -9,6 +9,13 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'Floreste';
+    src: url('/assets/fonts/FloresteWavy.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 
   :root {
     --color-primary-bg: #AE97E8;
@@ -18,6 +25,8 @@ const GlobalStyle = createGlobalStyle`
     --color-text-primary: #ffffff;
     --color-text-secondary: #c4c4ff;
     --color-button-bg: yellow;
+    --color-accent-text:#D9FF5A;
+    --color-decoration-bg: #CBB6FF;
 
     --border-radius-lg: 50px;
 
