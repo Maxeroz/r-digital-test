@@ -16,7 +16,7 @@ const ElipseShape = styled.div`
   width: 388px;
   height: 500px;
   border-radius: 50%;
-  background-color: var(--color-category-good-bg);
+  background-color: var(--color-decoration-bg);
   clip-path: path(
     "M83.6289 455.625C98.8589 469.226 121.265 458.556 132.088 441.241C146.648 417.948 169.193 403 194.5 403C219.626 403 242.029 417.735 256.598 440.741C267.533 458.011 290.025 468.583 305.196 454.884C355.264 409.675 388 334.764 388 250C388 243.069 382.224 237.709 375.336 236.937C355.438 234.707 337.984 226.446 330.992 211.451C321.908 191.971 330.108 169.463 348.347 150.371C357.937 140.333 362.795 125.802 356.517 113.42C321.885 45.1273 262.032 0 194 0C86.8568 0 0 111.929 0 250C0 335.229 33.0956 410.496 83.6289 455.625Z"
   );
@@ -92,6 +92,8 @@ const CircleButton = styled.button`
 
 const StyledArrow = styled.img`
   position: absolute;
+
+  cursor: pointer;
 
   top: 448px;
   left: 184px;

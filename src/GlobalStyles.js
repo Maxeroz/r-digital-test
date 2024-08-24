@@ -24,11 +24,9 @@ const GlobalStyle = createGlobalStyle`
     --color-slider-blue-bg: #AECFFF;
     --color-text-primary: #ffffff;
     --color-text-secondary: #c4c4ff;
-    --color-button-bg: yellow;
     --color-accent-text:#D9FF5A;
     --color-decoration-bg: #CBB6FF;
-    --color-category-good-bg: #CBB6FF;
-    
+
 
     --border-radius-lg: 50px;
 

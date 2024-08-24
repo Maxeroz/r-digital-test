@@ -13,7 +13,7 @@ const StyledSlidersContainer = styled.div`
   align-items: center;
 
   padding-top: 20px;
-  padding-right: 20px;
+
   gap: 20px;
 `;
 

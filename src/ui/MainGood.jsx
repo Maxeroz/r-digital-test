@@ -92,8 +92,16 @@ const StyledLampDecoration = styled.figure`
   z-index: 999;
 `;
 
-const ButtonBuyContainer = styled.div`
+const ButtonBuyContainer = styled.button`
   position: relative;
+
+  background-color: transparent;
+
+  border: none;
+
+  color: var(--color-text-primary);
+
+  cursor: pointer;
 
   display: flex;
   align-items: center;

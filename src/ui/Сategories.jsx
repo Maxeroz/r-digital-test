@@ -20,6 +20,8 @@ const StyledCategoriesContainer = styled.div`
 
   gap: 70px;
 
+  margin-bottom: 170px;
+
   flex-direction: column;
 `;
 
@@ -28,7 +30,6 @@ const CategoriesDiv = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 170px;
   gap: 35px;
 `;
 
