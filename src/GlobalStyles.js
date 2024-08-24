@@ -27,6 +27,8 @@ const GlobalStyle = createGlobalStyle`
     --color-button-bg: yellow;
     --color-accent-text:#D9FF5A;
     --color-decoration-bg: #CBB6FF;
+    --color-category-good-bg: #CBB6FF;
+    
 
     --border-radius-lg: 50px;
 
