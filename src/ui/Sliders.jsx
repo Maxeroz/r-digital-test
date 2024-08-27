@@ -1,10 +1,11 @@
+import { createContext, useState } from "react";
+
 import styled from "styled-components";
 import Slider from "./Slider";
 
 import lampSliderOne from "../main-images/lampSliderOne.svg";
 import chair from "../main-images/chair.svg";
 import table from "../main-images/table.svg";
-import { createContext, useState } from "react";
 
 export const SliderContext = createContext();
 
@@ -12,11 +13,19 @@ export const SliderContext = createContext();
 const SlidersProvider = ({ children }) => {
   const [openId, setOpenId] = useState("");
 
-  const close = () => setOpenId("");
-  const open = (id) => setOpenId(id);
+  // const close = () => setOpenId("");
+  // const open = (id) => setOpenId(id);
+
+  function toggle(id) {
+    if (openId === id) {
+      setOpenId("");
+    } else {
+      setOpenId(id);
+    }
+  }
 
   return (
-    <SliderContext.Provider value={{ openId, open, close }}>
+    <SliderContext.Provider value={{ openId, toggle }}>
       {children}
     </SliderContext.Provider>
   );

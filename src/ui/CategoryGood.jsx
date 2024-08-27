@@ -1,14 +1,21 @@
 import styled from "styled-components";
 
 import arrowDown from "../main-images/arrowDown.svg";
+import arrowDownActive from "../main-images/arrowDownActive.svg";
+import { useState } from "react";
 
-const CustomShapeContainer = styled.div`
-  width: 428px;
-  height: 517px;
-  position: relative;
+const StyledImage = styled.img`
+  width: 231px;
+  height: 248px;
+
+  z-index: 999;
+
+  transition: transform 0.3s ease;
 `;
 
 const ElipseShape = styled.div`
+  cursor: pointer;
+
   position: absolute;
   display: flex;
   align-items: center;
@@ -27,7 +34,7 @@ const CustomText = styled.span`
   color: white;
   font-size: 28px;
   top: 37px;
-  width: 200px;
+  width: 150px;
   white-space: pre-line;
   text-transform: uppercase;
 `;
@@ -48,6 +55,8 @@ const NumElipseText = styled.span`
 
   top: 20px;
   left: 22px;
+
+  transition: transform 0.3s ease;
 `;
 
 const TextAmountSpan = styled.span`
@@ -68,8 +77,7 @@ const StyledDescription = styled.div`
   letter-spacing: 2px;
 
   z-index: 999;
-  /* opacity: 0.5; */
-  /* background-color: red; */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,12 +96,12 @@ const CircleButton = styled.button`
 
   width: 101px;
   height: 101px;
+
+  transition: 0.3 ease;
 `;
 
 const StyledArrow = styled.img`
   position: absolute;
-
-  cursor: pointer;
 
   top: 448px;
   left: 184px;
@@ -145,6 +153,25 @@ const coords = [
   { top: 228, left: 24 },
 ];
 
+const CustomShapeContainer = styled.div`
+  width: 428px;
+  height: 517px;
+  position: relative;
+
+  /* При наведении на контейнер увеличиваем изображение */
+  &:hover ${StyledImage} {
+    transform: scale(1.1);
+  }
+
+  &:hover ${NumElipseText} {
+    transform: rotate(23deg);
+  }
+
+  &:hover ${CircleButton} {
+    background-color: var(--color-accent-text);
+  }
+`;
+
 // Функция для создания массива объектов с буквой, углом и координатами
 function createLettersWithAnglesAndCoords(wordArray, angleArray, coordArray) {
   return wordArray.map((letter, index) => ({
@@ -163,10 +190,23 @@ const lettersWithAnglesAndCoords = createLettersWithAnglesAndCoords(
 );
 
 /* eslint-disable-next-line react/prop-types */
-function CategoryGood({ title, children, amount }) {
+function CategoryGood({ title, amount, imageUrl }) {
+  const [isActiveArrow, setIsActiveArrow] = useState(arrowDown);
+
+  function handleEnter() {
+    setIsActiveArrow(arrowDownActive);
+  }
+
+  function handleOut() {
+    setIsActiveArrow(arrowDown);
+  }
+
   return (
-    <CustomShapeContainer>
-      <ElipseShape>{children}</ElipseShape>
+    <CustomShapeContainer onMouseEnter={handleEnter} onMouseLeave={handleOut}>
+      <ElipseShape>
+        <StyledImage src={imageUrl} />
+      </ElipseShape>
+
       <StyledDescription>
         {lettersWithAnglesAndCoords.map((el, index) => (
           <LetterBox key={index} angle={el.angle} top={el.top} left={el.left}>
@@ -174,14 +214,18 @@ function CategoryGood({ title, children, amount }) {
           </LetterBox>
         ))}
       </StyledDescription>
+
       <CustomText>{title}</CustomText>
+
       <NumElipse>
         <NumElipseText>
           <AmountSpan>{amount}</AmountSpan> <TextAmountSpan>шт</TextAmountSpan>
         </NumElipseText>
       </NumElipse>
+
       <CircleButton />
-      <StyledArrow src={arrowDown} />
+
+      <StyledArrow src={isActiveArrow} />
     </CustomShapeContainer>
   );
 }

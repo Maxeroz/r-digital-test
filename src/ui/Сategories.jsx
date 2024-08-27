@@ -33,13 +33,6 @@ const CategoriesDiv = styled.div`
   gap: 35px;
 `;
 
-const StyledImage = styled.img`
-  width: 231px;
-  height: 248px;
-
-  z-index: 999;
-`;
-
 const array = [
   { title: "Напольные зеркала", amount: 4, imageUrl: mirror },
   { title: "Торшеры и лампы", amount: 4, imageUrl: lampGood },
@@ -62,9 +55,8 @@ function Categories() {
             key={good.title}
             title={good.title}
             amount={good.amount}
-          >
-            <StyledImage src={good.imageUrl} />
-          </CategoryGood>
+            imageUrl={good.imageUrl}
+          />
         ))}
       </CategoriesDiv>
     </StyledCategoriesContainer>

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import MainGood from "./MainGood";
 import SlidersContent from "./Sliders";
 import Row from "./Row";
 import Categories from "./Сategories";
@@ -16,8 +15,6 @@ const StyledAppLayout = styled.div`
   display: flex;
   width: 1920px;
 
-  /* margin: 0 auto; */
-
   flex-direction: column;
 
   overflow: hidden;
@@ -33,6 +30,7 @@ const StyledGoodRow = styled.div`
 
 const BlogData = [
   {
+    id: 1,
     brand: "Laura Busche",
     title: "новая коллекция кресел",
     date: "14 Января 2023",
@@ -40,6 +38,7 @@ const BlogData = [
     time: "3",
   },
   {
+    id: 2,
     brand: "Laura Busche",
     title: "Световой дизайн в интерьере",
     date: "14 Января 2023",
@@ -47,6 +46,7 @@ const BlogData = [
     time: "3",
   },
   {
+    id: 3,
     brand: "Laura Busche",
     title: "как выбрать шкаф в спальню",
     date: "14 Января 2023",
@@ -63,6 +63,7 @@ function AppLayout() {
         {/* <MainGood /> */}
         <SlidersContent />
       </StyledGoodRow>
+
       <Row>
         <Categories />
       </Row>

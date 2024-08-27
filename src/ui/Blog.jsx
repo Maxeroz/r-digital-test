@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Heading from "./Heading";
 import Pagination from "./Pagination";
+import { useState } from "react";
 
 const BlogContainer = styled.div`
   position: relative;
@@ -65,14 +66,32 @@ const ImageSection = styled.div`
   justify-content: center;
   width: 283px;
   height: 100%;
+
   padding: 13px;
-  position: relative; /* Ensure this is positioned relative */
+  position: relative;
+
+  overflow: hidden;
+`;
+
+const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--border-radius-md);
 `;
 
 const StyledImage = styled.img`
   width: 100%;
   height: 100%;
-  z-index: 1; /* Ensure this has a lower z-index than the ellipse */
+  z-index: 1;
+
+  object-fit: contain;
+
+  transition: transform 0.6s ease;
 `;
 
 const BlogCard = styled.div`
@@ -96,10 +115,6 @@ const CardsContainer = styled.section`
   gap: 30px;
 `;
 
-const Box = styled.div`
-  position: relative;
-`;
-
 const BlogElipse = styled.button`
   position: absolute;
   left: 130px;
@@ -115,7 +130,10 @@ const BlogElipse = styled.button`
 
   transform: rotate(-15deg);
 
-  background-color: var(--color-decoration-bg);
+  background-color: ${(props) =>
+    props.isActive ? "var(--color-accent-text)" : "var(--color-decoration-bg)"};
+
+  transition: all 0.3s ease-in-out;
 `;
 
 const TimingContainer = styled.div`
@@ -124,9 +142,14 @@ const TimingContainer = styled.div`
   top: 10px;
   left: 33px;
 
+  color: ${(props) =>
+    props.isActive ? "var(--color-primary-bg)" : "var(--color-text-primary)"};
+
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  transition: all 0.3s ease-in-out;
 `;
 
 const Time = styled.span`
@@ -141,8 +164,30 @@ const TitlePagination = styled.div`
   gap: 45px;
 `;
 
+const Box = styled.div`
+  position: relative;
+
+  cursor: pointer;
+
+  &:hover ${StyledImage} {
+    transform: scale(1.2) translateX(-20px);
+  }
+`;
+
 /* eslint-disable-next-line react/prop-types */
 function Blog({ options }) {
+  const [isActive, setIsActive] = useState("");
+
+  console.log(isActive);
+
+  function handleEnter(id) {
+    setIsActive(id);
+  }
+
+  function handleOut() {
+    setIsActive("");
+  }
+
   return (
     <BlogContainer>
       <TitlePagination>
@@ -151,12 +196,17 @@ function Blog({ options }) {
           Блог
         </Heading>
       </TitlePagination>
+
       <CardsContainer>
         {/* eslint-disable-next-line react/prop-types  */}
         {options.map((option, i) => (
-          <Box key={option.title}>
-            <BlogElipse>
-              <TimingContainer>
+          <Box
+            key={option.title}
+            onMouseEnter={() => handleEnter(option.id)}
+            onMouseLeave={handleOut}
+          >
+            <BlogElipse isActive={isActive === option.id}>
+              <TimingContainer isActive={isActive === option.id}>
                 <Time>{option.time}</Time>
                 <span>мин</span>
               </TimingContainer>
@@ -172,7 +222,9 @@ function Blog({ options }) {
               </BlogCardSection>
 
               <ImageSection>
-                <StyledImage src={option.imageUrl} />
+                <ImageWrapper>
+                  <StyledImage src={option.imageUrl} />
+                </ImageWrapper>
               </ImageSection>
             </BlogCard>
           </Box>

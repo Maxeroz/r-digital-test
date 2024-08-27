@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
 
 
     --border-radius-lg: 50px;
+    --border-radius-md: 28px;
 
     --font-large: 36px;
     --font-medium: 24px;

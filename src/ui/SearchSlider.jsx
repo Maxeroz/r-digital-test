@@ -10,9 +10,21 @@ const StyledSearchContainer = styled.div`
   width: 330px;
 `;
 
-const StyledSpan = styled.span`
+const StyledInput = styled.input`
   font-size: 18px;
   font-weight: 500;
+
+  background-color: transparent;
+  border: none;
+
+  color: var(--color-text-primary);
+
+  outline: none;
+
+  &::placeholder {
+    color: var(--color-text-primary);
+    opacity: 1;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -35,7 +47,7 @@ function SearchSlider() {
       <ImgStyledContainer>
         <StyledImage src={search} alt="Search icon" />
       </ImgStyledContainer>
-      <StyledSpan>Поиск</StyledSpan>
+      <StyledInput placeholder="Поиск" />
     </StyledSearchContainer>
   );
 }
