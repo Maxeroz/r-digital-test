@@ -6,6 +6,8 @@ import styled, { css } from "styled-components";
 // `;
 
 const Heading = styled.h1`
+  text-transform: ${(props) => (props.upper === true ? "uppercase" : "")};
+
   ${(props) =>
     props.as === "h1" &&
     css`
@@ -26,7 +28,7 @@ const Heading = styled.h1`
     ${(props) =>
     props.as === "h3" &&
     css`
-      font-size: 2rem;
+      font-size: 20px;
       font-weight: 500;
     `}
 

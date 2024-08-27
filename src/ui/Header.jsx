@@ -2,12 +2,18 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import Catalog from "./Catalog";
 import BlogContacts from "./BlogContacts";
+import SliderNav from "./SliderNav";
+import SearchSlider from "./SearchSlider";
 
 const HeaderWrapper = styled.header`
+  position: absolute;
+
+  top: 53px;
+  left: 60px;
+
   align-items: center;
   display: flex;
   /* justify-content: space-between; */
-  width: 100%;
 `;
 
 const Nav = styled.nav`
@@ -29,6 +35,8 @@ function Header() {
       <Nav>
         <Catalog />
         <BlogContacts />
+        <SearchSlider />
+        <SliderNav />
       </Nav>
     </HeaderWrapper>
   );

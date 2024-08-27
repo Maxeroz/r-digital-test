@@ -7,14 +7,16 @@ const StyledRow = styled.div`
 
   align-items: ${(props) => props.align || "start"};
 
+  width: 100%;
+
   justify-content: space-between;
   gap: ${(props) => `${props.gap}px`};
 `;
 
 /* eslint-disable-next-line react/prop-types */
-function Row({ children, gap, direction }) {
+function Row({ children, gap, direction, align }) {
   return (
-    <StyledRow gap={gap} direction={direction}>
+    <StyledRow gap={gap} direction={direction} align={align}>
       {children}
     </StyledRow>
   );

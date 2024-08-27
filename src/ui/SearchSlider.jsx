@@ -3,10 +3,11 @@ import search from "../icons/search.svg";
 
 const StyledSearchContainer = styled.div`
   display: flex;
-  width: 100%;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   gap: 12px;
+
+  width: 330px;
 `;
 
 const StyledSpan = styled.span`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import MainGood from "./MainGood";
-import Sliders from "./Sliders";
+// import MainGood from "./MainGood";
+import SlidersContent from "./Sliders";
 import Row from "./Row";
 import Categories from "./Сategories";
 import Divider from "./Divider";
@@ -10,10 +10,13 @@ import newCollection from "../main-images/newCollection.svg";
 import light from "../main-images/light.svg";
 import closet from "../main-images/closet.svg";
 import Footer from "./Footer";
+import Header from "./Header";
 
 const StyledAppLayout = styled.div`
   display: flex;
   width: 1920px;
+
+  /* margin: 0 auto; */
 
   flex-direction: column;
 
@@ -24,6 +27,7 @@ const StyledGoodRow = styled.div`
   display: flex;
   align-items: start;
 
+  padding: 20px;
   margin-bottom: 150px;
 `;
 
@@ -54,9 +58,10 @@ const BlogData = [
 function AppLayout() {
   return (
     <StyledAppLayout>
+      <Header />
       <StyledGoodRow>
-        <MainGood />
-        <Sliders />
+        {/* <MainGood /> */}
+        <SlidersContent />
       </StyledGoodRow>
       <Row>
         <Categories />

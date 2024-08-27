@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
     --color-primary-bg: #AE97E8;
     --color-secondary-bg: #a96dff;
     --color-slider-pink-bg: #FA8FEF;
+    --color-slider-light-pink: #C5B0FA;
     --color-slider-blue-bg: #AECFFF;
     --color-text-primary: #ffffff;
     --color-text-secondary: #c4c4ff;
@@ -49,6 +50,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Euclid Circular A', sans-serif;
     background-color: var(--color-primary-bg);
     color: var(--color-text-primary);
+
   }
 
   a {

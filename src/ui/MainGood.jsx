@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Header from "./Header";
 import Row from "./Row";
 
 import basket from "../icons/basket-yellow.svg";
@@ -7,7 +6,7 @@ import lamp from "../main-images/lamp.svg";
 
 const StyledBox = styled.main`
   /* изменено на <main> */
-  padding: 53px 60px;
+  /* padding: 53px 60px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,7 +42,6 @@ const StyledBackground = styled.div`
 `;
 
 const BackgroundTitle = styled.h2`
-  /* изменено на <h2> */
   font-family: "Floreste";
   color: var(--color-decoration-bg);
   opacity: 0.6;
@@ -149,7 +147,6 @@ function MainGood() {
         <img src={lamp} alt="Дизайнерская лампа" />
       </StyledLampDecoration>
       <MainGoodContainer>
-        <Header />
         <GoodOfDay>
           <StyledBackground>
             <StyledTitleSpan>Товар дня</StyledTitleSpan>

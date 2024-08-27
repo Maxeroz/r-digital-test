@@ -5,7 +5,7 @@ import StyledLink from "./StyledLink";
 const StyledCatalogContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 470px;
+  width: 472px;
 
   gap: 12px;
 `;
