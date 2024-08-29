@@ -39,6 +39,10 @@ const ElipseButton = styled.button`
   color: var(--color-text-primary);
   transform: rotate(-15deg);
   border-radius: 50%;
+
+  &:hover {
+    background-color: rgba(225, 225, 225, 0.3);
+  }
 `;
 
 const StyledSpan = styled.span`
@@ -46,7 +50,7 @@ const StyledSpan = styled.span`
   font-weight: 400;
 `;
 
-const BlodSpan = styled(StyledSpan)`
+const BoldSpan = styled(StyledSpan)`
   font-weight: 700;
 `;
 
@@ -57,7 +61,7 @@ function Footer() {
       <ElipseButton>
         <StyledImage src={logo} />
         <span>
-          <BlodSpan>Request</BlodSpan>
+          <BoldSpan>Request</BoldSpan>
           {"  "}
           <StyledSpan>Design</StyledSpan>
         </span>

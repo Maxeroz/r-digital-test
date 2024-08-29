@@ -20,10 +20,10 @@ const StyledCategoriesContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 1920px;
-  height: 630px;
+  height: 650px;
   padding: 0px 60px;
   gap: 70px;
-  margin-bottom: 170px;
+
   flex-direction: column;
 `;
 

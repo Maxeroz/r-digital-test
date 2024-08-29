@@ -4,6 +4,8 @@ import star from "../icons/star.svg";
 
 const DividerContainer = styled.div`
   position: relative;
+
+  margin-top: 170px;
   width: 1920px; /* Установите ширину по вашему выбору */
   height: 261px; /* Высота контейнера, если линия горизонтальная */
 `;

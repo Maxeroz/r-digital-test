@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import Heading from "./Heading";
 import basket from "../icons/basket-yellow.svg";
 import filter from "../icons/filter.svg";
+import arrowLoadMore from "../icons/arrow-load-more.svg";
 
 // Определение анимации для плавного появления
 const fadeIn = keyframes`
@@ -22,18 +23,27 @@ const StyledExtrasContainer = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0px 60px;
-  height: 765px;
   width: 100%;
-  margin-bottom: 170px;
   gap: 73px;
   animation: ${fadeIn} 1s ease-out;
+  margin-top: 63px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledOptions = styled.ul`
   display: flex;
-  align-items: center;
+  flex-wrap: wrap; /* Позволяет элементам перетекать на новую строку */
   justify-content: space-between;
   list-style: none;
+  padding: 0;
+  margin: 0;
+  opacity: 1; /* Начальная непрозрачность */
+  animation: ${fadeIn} 0.5s ease-out; /* Применение анимации */
 `;
 
 const StyledHeader = styled.header`
@@ -62,25 +72,28 @@ const FilterSign = styled.img`
 const StyledLi = styled.li`
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрирование по горизонтали */
-  justify-content: center; /* Центрирование по вертикали */
-  text-align: center; /* Центрирование текста */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   color: #fff;
-  width: 274px;
+  width: 275px;
+  margin-bottom: 51px;
+  box-sizing: border-box;
+  margin-right: 2%;
 `;
 
 const ImgContainer = styled.div`
   display: flex;
-  align-items: center; /* Центрирование изображения */
-  justify-content: center; /* Горизонтальное центрирование изображения */
-  position: relative; /* Для позиционирования цветного круга */
+  align-items: center;
+  justify-content: center;
+  position: relative;
   height: 260px;
 `;
 
 const StyledColor = styled.span`
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 20px;
   height: 20px;
   background-color: ${(props) => props.color || "#000"};
@@ -146,8 +159,39 @@ const AmountSpan = styled.span`
   text-transform: uppercase;
 `;
 
+const ElipseButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 319px;
+  height: 135px;
+  border: 2px solid var(--color-accent-text);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  transform: rotate(-15deg);
+  border-radius: 50%;
+  gap: 6px;
+
+  &:hover {
+    background-color: rgba(225, 225, 225, 0.3);
+  }
+`;
+
+const StyledSpan = styled.span`
+  font-size: 20px;
+  font-weight: 500;
+  transform: rotate(15deg);
+`;
+
+const StyledImage = styled.img`
+  width: 24px;
+  height: 24px;
+  transform: rotate(15deg);
+`;
+
 function CatalogExtraSections({ options, amount }) {
-  // Создаем ссылку на контейнер
+  const [visibleItems, setVisibleItems] = useState(5);
   const containerRef = useRef(null);
 
   // Прокручиваем к контейнеру при монтировании
@@ -160,6 +204,42 @@ function CatalogExtraSections({ options, amount }) {
     }
   }, []);
 
+  const handleLoadMore = () => {
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + 5);
+  };
+
+  // Функция для рендеринга строк элементов
+  const renderRows = (items) => {
+    const rows = [];
+    for (let i = 0; i < items.length; i += 5) {
+      rows.push(
+        <StyledOptions key={`row-${i}`}>
+          {items.slice(i, i + 5).map((good) => (
+            <StyledLi key={good.id}>
+              <ImgContainer>
+                <StyledColor color={good.color} />
+                <StyledImg src={good.imgUlr} />
+              </ImgContainer>
+              <Heading style={{ marginTop: "32px" }} as="h4" upper={true}>
+                {good.name}
+              </Heading>
+              <StyledDescription>{good.desc}</StyledDescription>
+              <PurchaseBox>
+                <StyledPrice>{good.price}</StyledPrice>
+                <CurrencySign>₽</CurrencySign>
+                <ButtonBuyBox>
+                  <StyledImgBasket src={basket} />
+                  <StyledBuySpan>Купить</StyledBuySpan>
+                </ButtonBuyBox>
+              </PurchaseBox>
+            </StyledLi>
+          ))}
+        </StyledOptions>
+      );
+    }
+    return rows;
+  };
+
   return (
     <StyledExtrasContainer ref={containerRef}>
       <StyledHeader>
@@ -169,28 +249,17 @@ function CatalogExtraSections({ options, amount }) {
         </StyledFilter>
         <AmountSpan>{amount} позиций в категории</AmountSpan>
       </StyledHeader>
-      <StyledOptions>
-        {options.map((good) => (
-          <StyledLi key={good.id}>
-            <ImgContainer>
-              <StyledColor color={good.color} />
-              <StyledImg src={good.imgUlr} />
-            </ImgContainer>
-            <Heading style={{ marginTop: "32px" }} as="h4" upper={true}>
-              {good.name}
-            </Heading>
-            <StyledDescription>{good.desc}</StyledDescription>
-            <PurchaseBox>
-              <StyledPrice>{good.price}</StyledPrice>
-              <CurrencySign>₽</CurrencySign>
-              <ButtonBuyBox>
-                <StyledImgBasket src={basket} />
-                <StyledBuySpan>Купить</StyledBuySpan>
-              </ButtonBuyBox>
-            </PurchaseBox>
-          </StyledLi>
-        ))}
-      </StyledOptions>
+
+      {renderRows(options.slice(0, visibleItems))}
+
+      {visibleItems < options.length && (
+        <ButtonContainer>
+          <ElipseButton onClick={handleLoadMore}>
+            <StyledSpan>Загрузить еще</StyledSpan>
+            <StyledImage src={arrowLoadMore} />
+          </ElipseButton>
+        </ButtonContainer>
+      )}
     </StyledExtrasContainer>
   );
 }
