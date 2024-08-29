@@ -1,8 +1,39 @@
+/* eslint-disable react/prop-types */
+
 import styled from "styled-components";
 
 import arrowDown from "../main-images/arrowDown.svg";
 import arrowDownActive from "../main-images/arrowDownActive.svg";
-import { useState } from "react";
+
+const word = "изготовление на заказ".split("");
+const angles = [
+  -142, -137, -134, -131, -128, -125, -121, -118, -115, -112, -109, -106, -104,
+  -102, -99, -97, -95, -93, -90, -88, -86,
+];
+
+const coords = [
+  { top: 411, left: 94 },
+  { top: 404, left: 86 },
+  { top: 398, left: 80 },
+  { top: 390, left: 72 },
+  { top: 383, left: 67 },
+  { top: 374, left: 60 },
+  { top: 366, left: 55 },
+  { top: 356, left: 49 },
+  { top: 347, left: 43 },
+  { top: 336, left: 40 },
+  { top: 325, left: 35 },
+  { top: 314, left: 32 },
+  { top: 310, left: 31 },
+  { top: 298, left: 28 },
+  { top: 287, left: 26 },
+  { top: 281, left: 25 },
+  { top: 272, left: 25 },
+  { top: 259, left: 24 },
+  { top: 249, left: 24 },
+  { top: 238, left: 24 },
+  { top: 228, left: 24 },
+];
 
 const StyledImage = styled.img`
   width: 231px;
@@ -85,26 +116,25 @@ const StyledDescription = styled.div`
 
 const CircleButton = styled.button`
   position: relative;
-
   top: 345px;
   left: 144px;
 
-  background-color: transparent;
+  background-color: ${({ isActive }) =>
+    isActive ? "var(--color-accent-text)" : "transparent"};
   border-radius: 50%;
-
   border: 2px solid var(--color-accent-text);
 
   width: 101px;
   height: 101px;
 
-  transition: 0.3 ease;
+  transition: background-color 0.3s ease;
 `;
 
 const StyledArrow = styled.img`
   position: absolute;
 
-  top: 448px;
-  left: 184px;
+  top: 28px;
+  left: 38px;
 
   width: 20px;
   height: 34px;
@@ -123,40 +153,12 @@ const LetterBox = styled.span`
   left: ${({ left }) => `${left}px`};
 `;
 
-const word = "изготовление на заказ".split("");
-const angles = [
-  -142, -137, -134, -131, -128, -125, -121, -118, -115, -112, -109, -106, -104,
-  -102, -99, -97, -95, -93, -90, -88, -86,
-];
-
-const coords = [
-  { top: 411, left: 94 },
-  { top: 404, left: 86 },
-  { top: 398, left: 80 },
-  { top: 390, left: 72 },
-  { top: 383, left: 67 },
-  { top: 374, left: 60 },
-  { top: 366, left: 55 },
-  { top: 356, left: 49 },
-  { top: 347, left: 43 },
-  { top: 336, left: 40 },
-  { top: 325, left: 35 },
-  { top: 314, left: 32 },
-  { top: 310, left: 31 },
-  { top: 298, left: 28 },
-  { top: 287, left: 26 },
-  { top: 281, left: 25 },
-  { top: 272, left: 25 },
-  { top: 259, left: 24 },
-  { top: 249, left: 24 },
-  { top: 238, left: 24 },
-  { top: 228, left: 24 },
-];
-
 const CustomShapeContainer = styled.div`
   width: 428px;
   height: 517px;
   position: relative;
+
+  cursor: pointer;
 
   /* При наведении на контейнер увеличиваем изображение */
   &:hover ${StyledImage} {
@@ -165,10 +167,6 @@ const CustomShapeContainer = styled.div`
 
   &:hover ${NumElipseText} {
     transform: rotate(23deg);
-  }
-
-  &:hover ${CircleButton} {
-    background-color: var(--color-accent-text);
   }
 `;
 
@@ -190,19 +188,16 @@ const lettersWithAnglesAndCoords = createLettersWithAnglesAndCoords(
 );
 
 /* eslint-disable-next-line react/prop-types */
-function CategoryGood({ title, amount, imageUrl }) {
-  const [isActiveArrow, setIsActiveArrow] = useState(arrowDown);
-
-  function handleEnter() {
-    setIsActiveArrow(arrowDownActive);
-  }
-
-  function handleOut() {
-    setIsActiveArrow(arrowDown);
-  }
-
+function CategoryGood({
+  title,
+  amount,
+  imageUrl,
+  handleClick,
+  isActive,
+  isActiveArrow,
+}) {
   return (
-    <CustomShapeContainer onMouseEnter={handleEnter} onMouseLeave={handleOut}>
+    <CustomShapeContainer>
       <ElipseShape>
         <StyledImage src={imageUrl} />
       </ElipseShape>
@@ -223,9 +218,9 @@ function CategoryGood({ title, amount, imageUrl }) {
         </NumElipseText>
       </NumElipse>
 
-      <CircleButton />
-
-      <StyledArrow src={isActiveArrow} />
+      <CircleButton isActive={isActive} onClick={handleClick}>
+        <StyledArrow src={isActiveArrow ? arrowDownActive : arrowDown} />
+      </CircleButton>
     </CustomShapeContainer>
   );
 }

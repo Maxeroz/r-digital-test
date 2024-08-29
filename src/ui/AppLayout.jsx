@@ -60,7 +60,6 @@ function AppLayout() {
     <StyledAppLayout>
       <Header />
       <StyledGoodRow>
-        {/* <MainGood /> */}
         <SlidersContent />
       </StyledGoodRow>
 

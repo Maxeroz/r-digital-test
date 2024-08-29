@@ -28,6 +28,12 @@ const GlobalStyle = createGlobalStyle`
     --color-accent-text:#D9FF5A;
     --color-decoration-bg: #CBB6FF;
 
+    --color-catagory-item-blue: #A5D4FF;
+    --color-catagory-item-dark-pink: #F0B3EA;
+    --color-catagory-item-dark-blue: #8ECDFA;
+    --color-catagory-item-light-brown: #FBE4CA;
+    --color-catagory-item-pink: #F0B3EA;
+
 
     --border-radius-lg: 50px;
     --border-radius-md: 28px;
