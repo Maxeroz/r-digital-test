@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { SliderContext } from "./Sliders";
 import NumSlide from "./NumSlide";
 import SliderDescription from "./SliderDescription";
 import Good from "./Good";
-
 import basket from "../icons/basket-yellow.svg";
 import Row from "./Row";
+import { useItemsContext } from "../context/ProductItemsContext";
 
 // Определение анимации для контейнера слайдера
 const slideIn = keyframes`
@@ -74,19 +75,19 @@ const BackgroundTitle = styled.h2`
 // Определение анимации для изображения
 const imageScale = keyframes`
   from {
-    transform: rotate(0deg) scale(1);
+    transform: rotate(7deg) scale(1);
   }
   to {
-    transform: rotate(-7deg) scale(1.5);
+    transform: rotate(0deg) scale(1.9);
   }
 `;
 
 const StyledImage = styled.img`
   position: absolute;
-  top: 250px;
+  top: 300px;
   transform: ${(props) =>
-    props.isActive ? "rotate(-7deg) scale(1.5)" : "none"};
-  z-index: 999;
+    props.isActive ? "rotate(0deg) scale(1.9)" : "none"};
+  z-index: 888;
   transition: transform 0.3s ease-in-out;
   animation: ${(props) => (props.isActive ? imageScale : "none")} 0.3s
     ease-in-out;
@@ -155,14 +156,34 @@ const StyledTitleSpan = styled.h1`
   text-transform: uppercase;
 `;
 
-/* eslint-disable-next-line react/prop-types */
-function Slider({ backgroundColor, id, title, desc, price, imgUrl, brand }) {
+function Slider({
+  backgroundColor,
+  id,
+  title,
+  desc,
+  price,
+  imgUrl,
+  brand,
+  color,
+}) {
   const { openId, toggle } = useContext(SliderContext);
 
   const width = openId === "" ? "33%" : openId === id ? "64%" : "18%";
   const isActive = openId !== id;
 
   const currentBrand = openId === "" ? brand : "";
+
+  const { handleAdd } = useItemsContext();
+
+  const item = {
+    id,
+    title,
+    desc,
+    price,
+    imgUrl: imgUrl,
+    brand,
+    color,
+  };
 
   return (
     <StyledSliderContainer
@@ -196,7 +217,10 @@ function Slider({ backgroundColor, id, title, desc, price, imgUrl, brand }) {
         )}
 
         {!isActive && (
-          <ButtonBuyContainer isVisible={!isActive}>
+          <ButtonBuyContainer
+            isVisible={!isActive}
+            onClick={() => handleAdd(item)}
+          >
             <Ellipse1 />
             <Ellipse2 />
             <ButtonBuy>

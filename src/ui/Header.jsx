@@ -4,6 +4,7 @@ import Catalog from "./Catalog";
 import BlogContacts from "./BlogContacts";
 import SliderNav from "./SliderNav";
 import SearchSlider from "./SearchSlider";
+import { memo } from "react";
 
 const HeaderWrapper = styled.header`
   position: absolute;
@@ -13,7 +14,8 @@ const HeaderWrapper = styled.header`
 
   align-items: center;
   display: flex;
-  /* justify-content: space-between; */
+
+  z-index: 999;
 `;
 
 const Nav = styled.nav`
@@ -42,4 +44,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);

@@ -29,9 +29,11 @@ function SliderNav() {
       <StyledButton>
         <StyledImage src={heart} alt="heart" />
       </StyledButton>
+
       <StyledButton>
         <StyledImage src={profile} alt="profile" />
       </StyledButton>
+
       <StyledButton>
         <StyledImage src={basket} alt="basket" />
       </StyledButton>

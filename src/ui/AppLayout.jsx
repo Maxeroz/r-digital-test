@@ -5,11 +5,13 @@ import Categories from "./Сategories";
 import Divider from "./Divider";
 import Blog from "./Blog";
 
-import newCollection from "../main-images/newCollection.svg";
-import light from "../main-images/light.svg";
-import closet from "../main-images/closet.svg";
+import newCollection from "../../public/main-images/newCollection.svg";
+import light from "../../public/main-images/light.svg";
+import closet from "../../public/main-images/closet.svg";
 import Footer from "./Footer";
 import Header from "./Header";
+import ShoppingCart from "./ShoppingCart";
+import ProductItemsContext from "../context/ProductItemsContext";
 
 const StyledAppLayout = styled.div`
   display: flex;
@@ -57,27 +59,30 @@ const BlogData = [
 
 function AppLayout() {
   return (
-    <StyledAppLayout>
-      <Header />
-      <StyledGoodRow>
-        <SlidersContent />
-      </StyledGoodRow>
+    <ProductItemsContext>
+      <StyledAppLayout>
+        <ShoppingCart />
+        <Header />
+        <StyledGoodRow>
+          <SlidersContent />
+        </StyledGoodRow>
 
-      <Row>
-        <Categories />
-      </Row>
+        <Row>
+          <Categories />
+        </Row>
 
-      <Divider
-        colorFront="--color-slider-blue-bg"
-        offset={-20}
-        angleFront={-2}
-        angleBack={5}
-      />
+        <Divider
+          colorFront="--color-slider-blue-bg"
+          offset={-20}
+          angleFront={-2}
+          angleBack={5}
+        />
 
-      <Blog options={BlogData} />
+        <Blog options={BlogData} />
 
-      <Footer />
-    </StyledAppLayout>
+        <Footer />
+      </StyledAppLayout>
+    </ProductItemsContext>
   );
 }
 

@@ -26,7 +26,7 @@ const StyledExtrasContainer = styled.section`
   width: 100%;
   gap: 73px;
   animation: ${fadeIn} 1s ease-out;
-  margin-top: 63px;
+  padding-top: 63px;
 `;
 
 const ButtonContainer = styled.div`
@@ -37,13 +37,26 @@ const ButtonContainer = styled.div`
 
 const StyledOptions = styled.ul`
   display: flex;
-  flex-wrap: wrap; /* Позволяет элементам перетекать на новую строку */
   justify-content: space-between;
   list-style: none;
   padding: 0;
   margin: 0;
-  opacity: 1; /* Начальная непрозрачность */
-  animation: ${fadeIn} 0.5s ease-out; /* Применение анимации */
+  opacity: 1;
+  animation: ${fadeIn} 0.5s ease-out;
+`;
+
+const StyledLi = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 51px;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 200px;
+  max-width: 274px;
 `;
 
 const StyledHeader = styled.header`
@@ -67,19 +80,6 @@ const FilterSpan = styled.span`
 const FilterSign = styled.img`
   width: 20px;
   height: 21px;
-`;
-
-const StyledLi = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-  width: 275px;
-  margin-bottom: 51px;
-  box-sizing: border-box;
-  margin-right: 2%;
 `;
 
 const ImgContainer = styled.div`

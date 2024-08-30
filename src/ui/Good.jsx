@@ -32,10 +32,11 @@ const StyledBackground = styled.div`
 const StyledImage = styled.img`
   position: absolute;
 
-  transform: ${(props) =>
-    props.isActive ? "rotate(-7deg) scale(1.5)" : "none"};
+  top: 20px;
 
-  z-index: 999;
+  transform: ${(props) => (props.isActive ? "scale(1.5)" : "rotate(7deg)")};
+
+  z-index: 888;
 `;
 
 /* eslint-disable-next-line react/prop-types */

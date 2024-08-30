@@ -2,8 +2,9 @@
 
 import styled from "styled-components";
 
-import arrowDown from "../main-images/arrowDown.svg";
-import arrowDownActive from "../main-images/arrowDownActive.svg";
+import arrowDown from "../../public/main-images/arrowDown.svg";
+import arrowDownActive from "../../public/main-images/arrowDownActive.svg";
+import { memo } from "react";
 
 const word = "изготовление на заказ".split("");
 const angles = [
@@ -225,4 +226,4 @@ function CategoryGood({
   );
 }
 
-export default CategoryGood;
+export default memo(CategoryGood);

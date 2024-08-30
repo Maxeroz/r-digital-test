@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --color-primary-bg: #AE97E8;
     --color-secondary-bg: #a96dff;
+    /* --color-slider-grey-bg: #AE97E8; */
     --color-slider-pink-bg: #FA8FEF;
     --color-slider-light-pink: #C5B0FA;
     --color-slider-blue-bg: #AECFFF;
@@ -27,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     --color-text-secondary: #c4c4ff;
     --color-accent-text:#D9FF5A;
     --color-decoration-bg: #CBB6FF;
+    --color-cart-bg: #332065;
 
     --color-catagory-item-blue: #A5D4FF;
     --color-catagory-item-dark-pink: #F0B3EA;
