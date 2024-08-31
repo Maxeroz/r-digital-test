@@ -41,7 +41,7 @@ const ElipseButton = styled.button`
   border-radius: 50%;
 
   &:hover {
-    background-color: rgba(225, 225, 225, 0.3);
+    background-color: var(--color-hover-action);
   }
 `;
 

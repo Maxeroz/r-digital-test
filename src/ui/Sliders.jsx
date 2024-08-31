@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 import styled from "styled-components";
 import Slider from "./Slider";
-import { useItemsContext } from "../context/ProductItemsContext";
+import { slidersData } from "../data/SlidersData";
 
 export const SliderContext = createContext();
 
@@ -34,14 +34,12 @@ const StyledSlidersContainer = styled.div`
 `;
 
 function Sliders() {
-  const { slidersContent } = useItemsContext();
-
   return (
     <StyledSlidersContainer>
-      {slidersContent.map((slider) => (
+      {slidersData.map((slider) => (
         <Slider
           id={slider.id}
-          backgroundColor={slider.color}
+          backgroundColor={slider.backgroundColor}
           key={slider.id}
           title={slider.title}
           desc={slider.desc}

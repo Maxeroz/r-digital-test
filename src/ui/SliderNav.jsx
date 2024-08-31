@@ -2,6 +2,7 @@ import styled from "styled-components";
 import heart from "../icons/heart.svg";
 import profile from "../icons/profile.svg";
 import basket from "../icons/basket.svg";
+import { useItemsContext } from "../context/ProductItemsContext";
 
 const StyledSliderNav = styled.div`
   display: flex;
@@ -20,10 +21,18 @@ const StyledImage = styled.img`
 const StyledButton = styled.button`
   border: none;
   background-color: transparent;
+
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 /* eslint-disable-next-line react/prop-types */
 function SliderNav() {
+  const { handleOpenCart, isVisible } = useItemsContext();
+
   return (
     <StyledSliderNav>
       <StyledButton>
@@ -34,7 +43,7 @@ function SliderNav() {
         <StyledImage src={profile} alt="profile" />
       </StyledButton>
 
-      <StyledButton>
+      <StyledButton onClick={handleOpenCart} disabled={isVisible}>
         <StyledImage src={basket} alt="basket" />
       </StyledButton>
     </StyledSliderNav>

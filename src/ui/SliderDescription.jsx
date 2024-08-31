@@ -32,6 +32,7 @@ const StyledInfo = styled.p`
 `;
 
 const StyledPriceSpan = styled.span`
+  position: relative;
   font-family: "Floreste";
   font-size: 40px;
   color: ${(props) =>
@@ -40,6 +41,11 @@ const StyledPriceSpan = styled.span`
   padding-left: ${(props) => (props.isActive ? "59px" : "0px")};
 
   text-align: ${(props) => (props.isActive ? "center" : "left")};
+`;
+
+const CurrencySign = styled.span`
+  position: absolute;
+  font-size: 20px;
 `;
 
 /* eslint-disable-next-line react/prop-types */
@@ -56,7 +62,9 @@ function SliderDescription({ title, desc, price, id }) {
         </Heading>
         <StyledInfo isActive={isActive}>{desc}</StyledInfo>
       </SlideDescriptionContainer>
-      <StyledPriceSpan isActive={isActive}>{price} ₽</StyledPriceSpan>
+      <StyledPriceSpan isActive={isActive}>
+        {price.toLocaleString("ru-RU")} <CurrencySign>₽</CurrencySign>
+      </StyledPriceSpan>
     </Row>
   );
 }

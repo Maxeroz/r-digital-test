@@ -137,10 +137,10 @@ const Ellipse2 = styled.div`
   border-radius: 50%;
   transform: rotate(-13deg);
   z-index: 1;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 
   &:hover {
-    background-color: rgba(225, 225, 225, 0.3);
+    background-color: var(--color-hover-action);
   }
 `;
 
@@ -173,7 +173,7 @@ function Slider({
 
   const currentBrand = openId === "" ? brand : "";
 
-  const { handleAdd } = useItemsContext();
+  const { handleAdd, handleOpenCart } = useItemsContext();
 
   const item = {
     id,
@@ -183,6 +183,7 @@ function Slider({
     imgUrl: imgUrl,
     brand,
     color,
+    amount: 1,
   };
 
   return (
@@ -219,7 +220,10 @@ function Slider({
         {!isActive && (
           <ButtonBuyContainer
             isVisible={!isActive}
-            onClick={() => handleAdd(item)}
+            onClick={() => {
+              handleOpenCart();
+              handleAdd(item);
+            }}
           >
             <Ellipse1 />
             <Ellipse2 />

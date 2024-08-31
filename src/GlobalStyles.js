@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --color-primary-bg: #AE97E8;
     --color-secondary-bg: #a96dff;
-    /* --color-slider-grey-bg: #AE97E8; */
     --color-slider-pink-bg: #FA8FEF;
     --color-slider-light-pink: #C5B0FA;
     --color-slider-blue-bg: #AECFFF;
@@ -35,6 +34,8 @@ const GlobalStyle = createGlobalStyle`
     --color-catagory-item-dark-blue: #8ECDFA;
     --color-catagory-item-light-brown: #FBE4CA;
     --color-catagory-item-pink: #F0B3EA;
+  
+    --color-hover-action: rgba(225, 225, 225, 0.3);
 
 
     --border-radius-lg: 50px;

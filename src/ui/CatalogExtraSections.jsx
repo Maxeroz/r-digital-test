@@ -5,6 +5,7 @@ import Heading from "./Heading";
 import basket from "../icons/basket-yellow.svg";
 import filter from "../icons/filter.svg";
 import arrowLoadMore from "../icons/arrow-load-more.svg";
+import { useItemsContext } from "../context/ProductItemsContext";
 
 // Определение анимации для плавного появления
 const fadeIn = keyframes`
@@ -143,6 +144,16 @@ const ButtonBuyBox = styled.button`
   border: none;
   color: var(--color-text-primary);
   gap: 11px;
+
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 `;
 
 const StyledImgBasket = styled.img`
@@ -194,6 +205,8 @@ function CatalogExtraSections({ options, amount }) {
   const [visibleItems, setVisibleItems] = useState(5);
   const containerRef = useRef(null);
 
+  const { handleAdd } = useItemsContext();
+
   // Прокручиваем к контейнеру при монтировании
   useEffect(() => {
     if (containerRef.current) {
@@ -225,9 +238,24 @@ function CatalogExtraSections({ options, amount }) {
               </Heading>
               <StyledDescription>{good.desc}</StyledDescription>
               <PurchaseBox>
-                <StyledPrice>{good.price}</StyledPrice>
+                <StyledPrice>{good.price.toLocaleString("ru-RU")}</StyledPrice>
+
                 <CurrencySign>₽</CurrencySign>
-                <ButtonBuyBox>
+
+                <ButtonBuyBox
+                  onClick={() => {
+                    handleAdd({
+                      id: good.id,
+                      title: good.title,
+                      desc: good.desc,
+                      price: good.price,
+                      imgUrl: good.imgUlr,
+                      brand: good.brand || "",
+                      color: good.color,
+                      amount: 1,
+                    });
+                  }}
+                >
                   <StyledImgBasket src={basket} />
                   <StyledBuySpan>Купить</StyledBuySpan>
                 </ButtonBuyBox>
