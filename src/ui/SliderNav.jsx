@@ -3,6 +3,7 @@ import heart from "../icons/heart.svg";
 import profile from "../icons/profile.svg";
 import basket from "../icons/basket.svg";
 import { useItemsContext } from "../context/ProductItemsContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const StyledSliderNav = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ const StyledButton = styled.button`
 /* eslint-disable-next-line react/prop-types */
 function SliderNav() {
   const { handleOpenCart, isVisible } = useItemsContext();
+  const { handleOpenForm } = useAuthContext();
 
   return (
     <StyledSliderNav>
@@ -40,7 +42,7 @@ function SliderNav() {
       </StyledButton>
 
       <StyledButton>
-        <StyledImage src={profile} alt="profile" />
+        <StyledImage src={profile} alt="profile" onClick={handleOpenForm} />
       </StyledButton>
 
       <StyledButton onClick={handleOpenCart} disabled={isVisible}>

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback } from "react";
 
-function useClickOutside(callback, isVisible) {
+function useClickOutside(callback, isVisible = true) {
   const ref = useRef(null);
 
   const handleClickOutside = useCallback(

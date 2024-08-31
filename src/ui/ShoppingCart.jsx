@@ -3,8 +3,8 @@ import { HiMiniXMark } from "react-icons/hi2";
 
 import trash from "../icons/trash.svg";
 import { useItemsContext } from "../context/ProductItemsContext";
-import useClickOutside from "../../hooks/useOutsideClick";
-import useEscapeKey from "../../hooks/useEscapeKey";
+import useClickOutside from "../hooks/useOutsideClick";
+import useEscapeKey from "../hooks/useEscapeKey";
 import { useEffect, useState } from "react";
 
 // Анимация для выезда корзины с правого края экрана
@@ -334,7 +334,8 @@ function ShoppingCart() {
                   <StyledBoxPrice>
                     <PriceContainer>
                       <Price>
-                        {item.price} <CurrencySignItem>₽</CurrencySignItem>
+                        {item.price.toLocaleString("ru-RU")}{" "}
+                        <CurrencySignItem>₽</CurrencySignItem>
                       </Price>
                     </PriceContainer>
                     <StyledAmountBox>
