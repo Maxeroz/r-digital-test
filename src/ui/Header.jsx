@@ -8,13 +8,10 @@ import { memo } from "react";
 
 const HeaderWrapper = styled.header`
   position: absolute;
-
   top: 53px;
   left: 60px;
-
   align-items: center;
   display: flex;
-
   z-index: 999;
 `;
 

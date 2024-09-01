@@ -6,6 +6,8 @@ import basket from "../icons/basket-yellow.svg";
 import filter from "../icons/filter.svg";
 import arrowLoadMore from "../icons/arrow-load-more.svg";
 import { useItemsContext } from "../context/ProductItemsContext";
+import Modal from "./Modal";
+import ItemModal from "./ItemModal";
 
 // Определение анимации для плавного появления
 const fadeIn = keyframes`
@@ -103,6 +105,8 @@ const StyledColor = styled.span`
 `;
 
 const StyledImg = styled.img`
+  cursor: pointer;
+
   position: relative;
 `;
 
@@ -231,7 +235,9 @@ function CatalogExtraSections({ options, amount }) {
             <StyledLi key={good.id}>
               <ImgContainer>
                 <StyledColor color={good.color} />
-                <StyledImg src={good.imgUlr} />
+                <Modal.OpenButton modalId={good.id}>
+                  <StyledImg src={good.imgUlr} />
+                </Modal.OpenButton>
               </ImgContainer>
               <Heading style={{ marginTop: "32px" }} as="h4" upper={true}>
                 {good.name}
@@ -260,6 +266,10 @@ function CatalogExtraSections({ options, amount }) {
                   <StyledBuySpan>Купить</StyledBuySpan>
                 </ButtonBuyBox>
               </PurchaseBox>
+
+              <Modal.Window name={good.id}>
+                <ItemModal />
+              </Modal.Window>
             </StyledLi>
           ))}
         </StyledOptions>

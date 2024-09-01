@@ -1,30 +1,33 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/prop-types */
-
 import { useState, useEffect } from "react";
-import SignUpForm from "./SignUpForm";
 import styled, { keyframes } from "styled-components";
+import ReactDOM from "react-dom"; // Импортируем ReactDOM для создания портала
+import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import { useAuthContext } from "../context/AuthContext";
 import useClickOutside from "../hooks/useOutsideClick";
+import useEscapeKey from "../hooks/useEscapeKey";
 
-// Анимация для выезда формы с правого края экрана
+// Анимация появления формы
 const slideIn = keyframes`
   from {
-    transform: translateX(100%);  /* Начальное положение за экраном */
+    transform: translateX(100%);
+    opacity: 0;
   }
   to {
-    transform: translateX(0);  /* Конечное положение на месте */
+    transform: translateX(0);
+    opacity: 1;
   }
 `;
 
-// Анимация для скрытия формы
+// Анимация исчезновения формы
 const slideOut = keyframes`
   from {
-    transform: translateX(0);  /* На месте */
+    transform: translateX(0);
+    opacity: 1;
   }
   to {
-    transform: translateX(100%);  /* За экраном */
+    transform: translateX(100%);
+    opacity: 0;
   }
 `;
 
@@ -35,7 +38,7 @@ const StyledFormContainer = styled.div`
   top: 125px;
   right: 61px;
   width: 605px;
-  height: 516px;
+  height: ${(props) => (props.isSignUp ? "604px" : "516px")};
   background: rgba(51, 32, 101, 0.18);
   backdrop-filter: blur(18px);
   border-radius: 30px;
@@ -43,44 +46,81 @@ const StyledFormContainer = styled.div`
   z-index: 999;
   animation: ${(props) => (props.isClosing ? slideOut : slideIn)} 0.3s ease-out
     forwards;
+  overflow: hidden;
 `;
 
 function UserForm() {
   const [isSignUp, setIsSignUp] = useState(false);
-  const [isClosing, setIsClosing] = useState(false); // Состояние для отслеживания закрытия
+  const [isTransitioning, setIsTransitioning] = useState(false); // Для отслеживания анимации переключения
+  const [isClosing, setIsClosing] = useState(false); // Для отслеживания закрытия формы
 
   const { isOpenForm, handleCloseForm } = useAuthContext();
 
   const handleSignUp = () => {
-    setIsSignUp(true);
+    setIsTransitioning(true); // Начало анимации ухода
+    setTimeout(() => {
+      setIsSignUp(true); // Переключение на SignUpForm
+      setIsTransitioning(false); // Завершение анимации
+    }, 300); // Длительность анимации соответствует `slideOut`
+  };
+
+  const handleLogin = () => {
+    setIsTransitioning(true); // Начало анимации ухода
+    setTimeout(() => {
+      setIsSignUp(false); // Переключение на LoginForm
+      setIsTransitioning(false); // Завершение анимации
+    }, 300); // Длительность анимации соответствует `slideOut`
   };
 
   const ref = useClickOutside(() => {
-    setIsClosing(true); // Запускаем анимацию закрытия
+    setIsClosing(true);
+    setIsSignUp(false);
   });
+
+  useEscapeKey(() => {
+    setIsClosing(true);
+  });
+
+  const handleCloseFormAnimated = () => {
+    setIsClosing(true);
+  };
 
   useEffect(() => {
     if (isClosing) {
-      // Ждем завершения анимации перед закрытием формы
       const timer = setTimeout(() => {
         handleCloseForm();
-        setIsClosing(false); // Сбрасываем состояние закрытия
-      }, 300); // Длительность анимации в миллисекундах
+        setIsClosing(false);
+      }, 300);
 
       return () => clearTimeout(timer);
     }
   }, [isClosing, handleCloseForm]);
 
-  // Если форма закрывается, то продолжаем рендерить контейнер, пока анимация не завершится
   if (isOpenForm || isClosing) {
-    return (
-      <StyledFormContainer ref={ref} isClosing={isClosing}>
-        {isSignUp ? <SignUpForm /> : <LoginForm handleSignUp={handleSignUp} />}
-      </StyledFormContainer>
+    return ReactDOM.createPortal(
+      <StyledFormContainer
+        ref={ref}
+        isClosing={isClosing || isTransitioning}
+        isSignUp={isSignUp}
+      >
+        {!isTransitioning &&
+          (isSignUp ? (
+            <SignUpForm
+              handleLogin={handleLogin}
+              onCloseForm={handleCloseFormAnimated}
+            />
+          ) : (
+            <LoginForm
+              handleSignUp={handleSignUp}
+              onCloseForm={handleCloseFormAnimated}
+            />
+          ))}
+      </StyledFormContainer>,
+      document.body // Рендерим контейнер в body
     );
   }
 
-  return null; // Не рендерим ничего, если форма закрыта
+  return null;
 }
 
 export default UserForm;

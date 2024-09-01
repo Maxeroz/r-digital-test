@@ -2,12 +2,31 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form"; // Импортируем useForm из react-hook-form
 import arrow from "../icons/arrowLogin.svg";
+import { HiMiniXMark } from "react-icons/hi2";
+
+const CartHeader = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 53px;
+`;
+
+const CartCloseButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 const InputsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-  gap: 50px;
+  gap: 20px;
 `;
 
 const FormInput = styled.input`
@@ -72,7 +91,7 @@ const FormTypeContainer = styled.div`
 const FormTypeSpan = styled.span`
   font-size: 15px;
   text-transform: uppercase;
-  letter-spacing: 10%;
+  letter-spacing: 2px;
 `;
 
 const SignUpButton = styled.button`
@@ -82,11 +101,15 @@ const SignUpButton = styled.button`
   color: var(--color-text-primary);
   background-color: transparent;
   border: none;
+
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 const ArrowIcon = styled.img``;
 
-function LoginForm({ handleSignUp }) {
+function LoginForm({ handleSignUp, onCloseForm }) {
   const {
     register,
     handleSubmit,
@@ -100,7 +123,20 @@ function LoginForm({ handleSignUp }) {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormTitle>Вход</FormTitle>
+        <CartHeader>
+          <FormTitle>Вход</FormTitle>
+
+          <CartCloseButton
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              onCloseForm();
+            }}
+          >
+            <HiMiniXMark size={36} />
+          </CartCloseButton>
+        </CartHeader>
+
         <InputsContainer>
           <div>
             <FormInput

@@ -1,6 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+
+  .no-scroll {
+    overflow: hidden;
+  }
+
  @font-face {
     font-family: 'Le Murmure';
     src: url('./fonts/LeMurmure-Regular.woff2') format('woff2'),

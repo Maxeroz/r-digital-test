@@ -22,18 +22,23 @@ const StyledImage = styled.img`
 const StyledButton = styled.button`
   border: none;
   background-color: transparent;
-
   transition: transform 0.1s ease-in-out;
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.5;
   }
 `;
 
 /* eslint-disable-next-line react/prop-types */
 function SliderNav() {
   const { handleOpenCart, isVisible } = useItemsContext();
-  const { handleOpenForm } = useAuthContext();
+  const { handleOpenForm, isOpenForm } = useAuthContext();
 
   return (
     <StyledSliderNav>
@@ -41,12 +46,12 @@ function SliderNav() {
         <StyledImage src={heart} alt="heart" />
       </StyledButton>
 
-      <StyledButton>
-        <StyledImage src={profile} alt="profile" onClick={handleOpenForm} />
+      <StyledButton onClick={handleOpenForm} disabled={isOpenForm}>
+        <StyledImage src={profile} alt="profile" />
       </StyledButton>
 
-      <StyledButton onClick={handleOpenCart} disabled={isVisible}>
-        <StyledImage src={basket} alt="basket" />
+      <StyledButton disabled={isVisible}>
+        <StyledImage src={basket} alt="basket" onClick={handleOpenCart} />
       </StyledButton>
     </StyledSliderNav>
   );

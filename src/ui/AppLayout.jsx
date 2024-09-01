@@ -14,6 +14,7 @@ import ShoppingCart from "./ShoppingCart";
 import ProductItemsContext from "../context/ProductItemsContext";
 import AuthContext from "../context/AuthContext";
 import UserForm from "./UserForm";
+import Modal from "./Modal";
 
 const StyledAppLayout = styled.div`
   display: flex;
@@ -63,29 +64,33 @@ function AppLayout() {
   return (
     <AuthContext>
       <ProductItemsContext>
-        <StyledAppLayout>
-          <UserForm />
-          <ShoppingCart />
-          <Header />
-          <StyledGoodRow>
-            <SlidersContent />
-          </StyledGoodRow>
+        <Modal>
+          <StyledAppLayout>
+            <UserForm />
+            <ShoppingCart />
 
-          <Row>
-            <Categories />
-          </Row>
+            <Header />
 
-          <Divider
-            colorFront="--color-slider-blue-bg"
-            offset={-20}
-            angleFront={-2}
-            angleBack={5}
-          />
+            <StyledGoodRow>
+              <SlidersContent />
+            </StyledGoodRow>
 
-          <Blog options={BlogData} />
+            <Row>
+              <Categories />
+            </Row>
 
-          <Footer />
-        </StyledAppLayout>
+            <Divider
+              colorFront="--color-slider-blue-bg"
+              offset={-20}
+              angleFront={-2}
+              angleBack={5}
+            />
+
+            <Blog options={BlogData} />
+
+            <Footer />
+          </StyledAppLayout>
+        </Modal>
       </ProductItemsContext>
     </AuthContext>
   );
